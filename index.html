@@ -1,0 +1,120 @@
+<!DOCTYPE html>  
+<html lang="az">  
+<head>  
+    <meta charset="UTF-8">  
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+    <title>Cars.az - Avtomobil Elanları</title>  
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        .banner {  
+            background-color: #c0392b;
+            color: white;  
+            margin-top: 30px;  
+            text-align: center;  
+        }  
+        .banner p {  
+            margin: 5px;  
+        }  
+        .banner .footer {  
+            margin-top: 5px;  
+            font-size: 0.9em;  
+        }
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+    <body class="bg-gray-100 p-5">
+        <!-- HEADER -->
+        <nav class="bg-red-600 p-4 mb-6 w-full">  
+            <div class="container mx-auto flex justify-center items-center gap-10">  
+                <div class="text-white font-bold text-xl"><a href="#">CARS.AZ</a></div>  
+                <div class="flex space-x-4 gap-4">  
+                    <a href="#" class="text-white hover:underline">Bütün elanlar</a>  
+                    <a href="#" class="text-white hover:underline">Salonlar</a>  
+                    <a href="#" class="text-white hover:underline">Avtokataloq</a>  
+                    <a href="#" class="text-white hover:underline">Moto</a>
+                </div>
+                <div class="relative">
+                    <button id="accessoriesButton" class="text-white hover:underline">Ehtiyat hissələr və aksessuarlar</button>
+                    <div id="accessoriesMenu" class="absolute bg-white border border-gray-300 rounded shadow hidden">
+                        <a href="#" class="block px-4 py-2 hover:bg-gray-100">Aksessuarlar</a>
+                        <a href="#" class="block px-4 py-2 hover:bg-gray-100">Audio ve videotexnika</a>
+                        <a href="#" class="block px-4 py-2 hover:bg-gray-100">Avtokosmetika ve Avtokimya</a>
+                        <a href="#" class="block px-4 py-2 hover:bg-gray-100">Ehtiyat hissələri</a>
+                        <a href="#" class="block px-4 py-2 hover:bg-gray-100">GPS naviqatorlar</a>
+                        <a href="#" class="block px-4 py-2 hover:bg-gray-100">Qeydiyyat nişanları</a>
+                        <a href="#" class="block px-4 py-2 hover:bg-gray-100">Siqnalizasiyalar</a>
+                        <a href="#" class="block px-4 py-2 hover:bg-gray-100">Videoqeydiyyatçılar</a>
+                        <a href="#" class="block px-4 py-2 hover:bg-gray-100">Şinlər, disk və təkərlər</a>
+                        <a href="#" class="block px-4 py-2 hover:bg-gray-100">Digər</a>
+                    </div>
+                </div>
+                <div class="relative">
+                    <button id="rentalButton" class="text-white hover:underline">İcarə</button>
+                    <div id="rentalMenu" class="absolute bg-white border border-gray-300 rounded shadow hidden">
+                        <a href="#" class="block px-4 py-2 hover:bg-gray-100">Avtomobillər</a>
+                        <a href="#" class="block px-4 py-2 hover:bg-gray-100">Avtobus və mikroavtobuslar</a>
+                        <a href="#" class="block px-4 py-2 hover:bg-gray-100">Motosiklet və mopedlər</a>
+                        <a href="#" class="block px-4 py-2 hover:bg-gray-100">Xüsusi texnika</a>
+                        <a href="#" class="block px-4 py-2 hover:bg-gray-100">Digər</a>
+                    </div>
+                </div>
+                <a href="#" class="bg-green-500 text-white rounded px-4 py-2 hover:bg-green-600">Yeni elan</a>  
+            </div>  
+        </nav>
+    
+        <!-- FILTERS -->
+        <div class="mb-5 flex flex-wrap gap-4">  
+            <select id="brandFilter" class="border rounded p-2">  
+                <option value="">Marka</option>  
+            </select>  
+            <select id="modelFilter" class="border rounded p-2">  
+                <option value="">Model</option>  
+            </select>  
+            <select id="newUsedFilter" class="border rounded p-2">  
+                <option value="">Hamısı</option>  
+                <option value="Yeni">Yeni</option>  
+                <option value="Sürülmüş">Sürülmüş</option>  
+            </select>  
+            <input type="number" id="minPrice" placeholder="Qiymət, min." class="border rounded p-2 w-24">  
+            <input type="number" id="maxPrice" placeholder="maks." class="border rounded p-2 w-24">  
+            <select id="currencyFilter" class="border rounded p-2">  
+                <option value="AZN">AZN</option>  
+                <option value="USD">USD</option>  
+            </select>  
+            <label class="flex items-center">  
+                <input type="checkbox" id="creditFilter" class="mr-2"> Kredit  
+            </label>  
+            <label class="flex items-center">  
+                <input type="checkbox" id="barterFilter" class="mr-2"> Barter  
+            </label>  
+            <select id="cityFilter" class="border rounded p-2">  
+                <option value="">Şəhər</option>  
+                <option value="Bakı">Bakı</option>  
+                <option value="Masallı">Masallı</option>  
+                <option value="Ağdam">Ağdam</option>  
+                <option value="Naftalan">Naftalan</option>  
+                <option value="Oğuz">Oğuz</option>  
+            </select>  
+            <button id="filterButton" class="bg-red-500 text-white rounded p-2">Elanları göstər</button>  
+        </div>  
+    
+        <h2 class="text-xl font-bold mb-4">PREMİUM ELANLAR</h2>  
+        <div id="carList" class="grid grid-cols-5 gap-4 object-cover"></div>
+
+
+        
+        <!-- FOOTER -->
+        <div class="banner">  
+            <p>Saytın Administrasiyası reklam bannerlərinin və yerləşdirilmiş elanların məzmununa görə məsuliyyət daşımır.</p>  
+            <div class="footer">  
+                <p>2006-2024 Digital Classifieds MMC. VÖEN: 1405631661</p>  
+                <p>Mobil versiyası</p>  
+            </div>  
+        </div>
+
+
+        <script src="script.js"></script>
+</body>  
+</html>
